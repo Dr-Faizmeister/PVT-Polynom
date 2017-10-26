@@ -8,6 +8,10 @@ ResFunc::ResFunc()
 
 int col_count, row_count;
 double A, B, C, D, E, F;
+Matrix a(col_count, vector<double>(row_count));
+Matrix b(col_count, vector<double>(row_count));
+double pressures[10] = {20, 40, 60, 80, 100, 120, 140, 160, 180, 200};
+double temperatures[6] = {293.15, 303.15, 313.15, 321.65, 333.15, 343.15};
 
 double poly(double p, double T)
 {
@@ -17,7 +21,7 @@ double poly(double p, double T)
 Matrix Read(string s, int m, int n)
 {
 	//create array a with m columns and n rows
-	Matrix a(m, vector<double>(n));
+	Matrix massive(m, vector<double>(n));
 
 	col_count = m;
 	row_count = n;
@@ -61,28 +65,16 @@ Matrix Read(string s, int m, int n)
 		for (int i = 0; i<row_count; i++)
 			for (int j = 0; j<col_count; j++)
 				in >> a[i][j];
-		
-		/* destructor
-		for (int i = 0; i<n; i++) delete [] a[i];
-		delete[] a;
-		*/
 		in.close();
 	}
 	else 
 	{
 		cout << "Problems with open table file";
 	}
-
-	//...///
 }
-
-Matrix b(col_count, vector<double>(row_count));
 
 double value(const Vector& X) 
 {
-	double pressures[10] = {20, 40, 60, 80, 100, 120, 140, 160, 180, 200};
-	double temperatures[6] = {293.15, 303.15, 313.15, 321.65, 333.15, 343.15};
-
 	int ii, jj, c, sc;
 
 	A = X[0];
@@ -102,8 +94,8 @@ double value(const Vector& X)
 		ii++;
 	}
 
-	for (int i = 0; i<row_count; i++)
-		for (int j = 0; j<col_count; j++)
+	for (int i = 0; i < row_count; i++)
+		for (int j = 0; j < col_count; j++)
 		{
 			c = a[i][j]-b[i][j];
 			sc += c*c;
@@ -111,6 +103,11 @@ double value(const Vector& X)
 		return sc;
 }
 
-ResFunc::~ResFunc(void)
+ResFunc::~ResFunc(void) // destructor
 {
+	for (int i = 0; i < row_count; i++) delete [] &b[i];
+		delete[] &b;
+
+	for (int i = 0; i < row_count; i++) delete [] &a[i];
+		delete[] &a;
 }
