@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include <fstream>
-#include <iostream>
 #include "Interfaces.h"
 
 class ResFunc : IFunction

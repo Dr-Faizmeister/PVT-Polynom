@@ -74,7 +74,7 @@ public:
 
 	/// LastPointsCount - количество последних лучших точек, по которым будет рассчитываться изменение значения функции невязки
 	/// ResidualFuncError - изменение функции невязки, при достижении которого будет останавливаться поиск минимума
-	virtual void setSearchTerminationCondition(const int LastPointsCount, const double ResidualFuncError) = 0;l
+	virtual void setSearchTerminationCondition(const int LastPointsCount, const double ResidualFuncError) = 0;
 	virtual TerminationReason getTerminationReason() = 0;
 };
 

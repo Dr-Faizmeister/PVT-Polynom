@@ -21,8 +21,6 @@ double poly(double p, double T)
 Matrix Read(string s, int m, int n)
 {
 	//create array a with m columns and n rows
-	Matrix massive(m, vector<double>(n));
-
 	col_count = m;
 	row_count = n;
 
@@ -60,6 +58,9 @@ Matrix Read(string s, int m, int n)
 
 		col_count = count / (tab_count + 1); // col number
 		row_count = tab_count + 1; // row number
+
+		a.resize(col_count, vector<double>(row_count));
+		b.resize(col_count, vector<double>(row_count));
 
 		//read table from file
 		for (int i = 0; i<row_count; i++)
